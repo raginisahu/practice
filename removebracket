@@ -1,0 +1,39 @@
+https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var minRemoveToMakeValid = function(s) {
+    // startBracket =0 
+    let start = 0;
+    let startIndex=[]
+    let i =0 ;
+    while(i <= s.length) {
+        if(s[i] == '('){
+            start ++
+            startIndex.push(i)
+            i++
+        } else if(s[i] == ')') {
+            if(start>0) {
+                start --
+                startIndex.pop()
+                i++
+            } else {
+                s = replaceAt(s,i)
+            }
+        } else i++
+        console.log("string",s.length,i)
+    }
+    
+        let l = startIndex.length -1;
+        while(l >= 0) {
+            s= replaceAt(s,startIndex[l])
+            l--
+        }
+    
+    function replaceAt(str,index) {
+        return str.substring(0,index) + str.substring(index+1, str.length)
+    }
+    return s
+};
