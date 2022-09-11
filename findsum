@@ -1,0 +1,43 @@
+
+
+
+let arrData = [5,3]
+let desired = 8
+
+const findSum = (arrData, desired) => {
+	for(let i=0; i<arrData.length; i++) {
+		if(binarySearch(removeCurrIndex(arrData,i), desired - arrData[i]))
+		return true
+	}
+	return false
+}
+
+const removeCurrIndex = (arr,i) => {
+	return arr.slice(0,i).concat(arr.slice(i+1,arr.length))
+}
+
+const binarySearch = (arr , element) => {
+	console.log("arr",arr,"element",element)
+	let start = 0;
+	let end = arr.length-1
+	let mid = Math.floor(end/2)
+	if(start == end) {
+		if(element == arr[mid])
+		return true
+	}
+	while(start < end) {
+		if(element > arr[mid]) {
+			start = mid + 1
+		} 
+		else {
+			end = mid
+		}
+		mid = Math.floor((start + end) /2)
+		if(arr[mid] == element)
+		return true
+		console.log("mid element",arr[mid],element,start,end)
+	}
+  return false
+}
+
+console.log(findSum(arrData, desired))
