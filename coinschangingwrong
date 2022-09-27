@@ -1,0 +1,39 @@
+/**
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+var coinChange = function(coins, amount) {
+    let tempamount = amount;
+    const coinsSize = coins.length
+    let counter=0
+    if(amount == 0)
+        return 0
+    else if(coinsSize == 1 && coins[0] > amount)
+        return -1
+    else if(coinsSize == 1 && coins[0] == amount)
+        return 1
+    else if(coinsSize == 1 && coins[0] < amount) {
+         let div = Math.floor(tempamount/coins[0])
+         counter = counter + div
+         tempamount = tempamount % coins[0]
+        if(tempamount == 0)
+            return counter
+        else return -1
+    }
+    coins.sort(function(a,b){return a-b})  
+    for(let i= coinsSize- 1; i>=0; i--) {
+        if(coins[i] == tempamount) {
+            counter ++
+            return counter
+        } else if(coins[i] < tempamount) {
+            let div = Math.floor(tempamount/coins[i])
+            tempamount = tempamount % coins[i]
+            counter = counter + div
+            console.log("tempamount and div",counter,tempamount, div)
+        }
+    }
+    if(tempamount == 0)
+    return counter
+    else -1
+};
